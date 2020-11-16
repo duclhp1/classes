@@ -1,7 +1,11 @@
 import "./styles.css"
+import {useHistory} from "react-router-dom";
+const onLogin = (history) => {
+    history.push("/");
+};
 
 function LoginForm() {
-
+    const history = useHistory();
     return (
         <div className="container h-100">
             <div className="d-flex justify-content-center h-100">
@@ -37,7 +41,7 @@ function LoginForm() {
                                 </div>
                             </div>
                             <div className="d-flex justify-content-center mt-3 login_container">
-                                <button type="button" name="button" className="btn login_btn">Login</button>
+                                <button type="button" name="button" className="btn login_btn" onClick={() => onLogin(history)}>Login</button>
                             </div>
                         </form>
                     </div>

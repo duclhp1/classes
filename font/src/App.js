@@ -1,13 +1,23 @@
-import "./App.css"
-import LoginForm from "./component/LoginForm";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+} from "react-router-dom";
+import Login from "./container/Login";
+import ListClass from "./container/ListClass";
 
 function App() {
   return (
-      <div className="container-fluid">
-        <div style={{paddingTop: "100px"}}>
-          <LoginForm/>
-        </div>
-      </div>
+      <Router>
+          <Switch>
+              <Route path="/login">
+                  <Login />
+              </Route>
+              <Route path="/">
+                  <ListClass />
+              </Route>
+          </Switch>
+      </Router>
   );
 }
 
