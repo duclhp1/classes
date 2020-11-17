@@ -1,4 +1,6 @@
-import Card from "../../component/Card";
+import Main from "../../component/Main";
+import {Card, Button} from "antd";
+const { Meta } = Card;
 
 const listCard = [
     {
@@ -89,10 +91,28 @@ const listCard = [
 
 export default function ListClass() {
     return (
-        <div className="container-fluid">
+        <Main
+            footerText={"Created by DucPV"}
+            links={["Danh sách lớp"]}
+        >
             <div className="d-flex justify-content-center flex-wrap">
-                {listCard.map(item => <Card title={item.title} description={item.description} buttonTitle={item.buttonTitle} img={item.img} key={item.key} />)}
+                {listCard.map((item, index) =>
+                    <Card
+                        key={index}
+                        hoverable
+                        style={{ width: 240, margin: 10 }}
+                        cover={<img alt="example" src={item.img} />}
+                        actions={[
+                            <Button
+                                type="primary"
+                                key={0}
+                                href="/class"
+                            >Button</Button>
+                        ]}
+                    >
+                        <Meta title={item.title} description={item.description} />
+                    </Card>)}
             </div>
-        </div>
+        </Main>
     )
 }

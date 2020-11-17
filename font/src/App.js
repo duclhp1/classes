@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 import Login from "./container/Login";
 import ListClass from "./container/ListClass";
+import ClassInfo from "./container/ClassInfo";
 
 function App() {
   return (
@@ -12,6 +13,9 @@ function App() {
           <Switch>
               <Route path="/login">
                   <Login />
+              </Route>
+              <Route path="/class">
+                  <ClassInfo />
               </Route>
               <Route path="/">
                   <ListClass />
