@@ -94,6 +94,7 @@ export default function ListClass() {
         <Main
             footerText={"Created by DucPV"}
             links={["Danh sách lớp"]}
+            tab={1}
         >
             <div className="d-flex justify-content-center flex-wrap">
                 {listCard.map((item, index) =>
@@ -107,7 +108,7 @@ export default function ListClass() {
                                 type="primary"
                                 key={0}
                                 href="/class"
-                            >Button</Button>
+                            >Xem</Button>
                         ]}
                     >
                         <Meta title={item.title} description={item.description} />

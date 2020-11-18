@@ -2,15 +2,15 @@ import { Layout, Menu, Breadcrumb } from 'antd';
 import {
     IdcardOutlined,
     GroupOutlined,
-    SettingOutlined,
+    TeamOutlined,
     LineChartOutlined,
 } from '@ant-design/icons';
 import {useHistory} from "react-router-dom";
 
 const { Header, Content, Footer, Sider } = Layout;
-import {useState} from "react"
+import {useState} from "react";
 
-function Main({links, footerText, displayContent, children}) {
+function Main({links, footerText, displayContent, children, tab}) {
     const history = useHistory();
     const [collapsed, setCollapsed] = useState(true);
 
@@ -23,34 +23,42 @@ function Main({links, footerText, displayContent, children}) {
     };
 
     const openListStudent = () => {
-        history.push("/login")
+        history.push("/students")
+    };
+
+    const openAnalytics = () => {
+        history.push("/thongke")
+    };
+
+    const openSetting = () => {
+        history.push("/caidat")
     };
 
     return (
         <Layout style={{ minHeight: '100vh' }}>
             <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
-                <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
+                <Menu theme="dark" defaultSelectedKeys={[`${tab}`]} mode="vertical">
                     <Menu.Item key="1" icon={<GroupOutlined />} onClick={openListClass}>
                         Danh sách lớp
                     </Menu.Item>
                     <Menu.Item key="2" icon={<IdcardOutlined />} onClick={openListStudent}>
                         Danh sách học sinh
                     </Menu.Item>
-                    <Menu.Item key="sub1" icon={<LineChartOutlined />} onClick={openListClass}>
+                    <Menu.Item key="3" icon={<LineChartOutlined />} onClick={openAnalytics}>
                         Thống kê
                     </Menu.Item>
-                    <Menu.Item key="9" icon={<SettingOutlined />} onClick={openListClass}>
-                        Cài đặt
+                    <Menu.Item key="4" icon={<TeamOutlined />} onClick={openSetting}>
+                        Danh sách giáo viên
                     </Menu.Item>
                 </Menu>
             </Sider>
             <Layout className="site-layout">
                 <Header className="site-layout-background" style={{ padding: 0 }} />
-                <Content style={{ margin: '0 16px' }}>
-                    <Breadcrumb style={{ margin: '16px 0' }}>
+                <Content style={{ margin: '0 6px' }}>
+                    <Breadcrumb style={{ margin: '6px 0' }}>
                         {links.map((item, index) => <Breadcrumb.Item key={index}>{item}</Breadcrumb.Item>)}
                     </Breadcrumb>
-                    <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
+                    <div className="site-layout-background" style={{ padding: 0, minHeight: 360 }}>
                         {children || displayContent}
                     </div>
                 </Content>

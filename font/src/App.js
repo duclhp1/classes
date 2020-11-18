@@ -6,6 +6,9 @@ import {
 import Login from "./container/Login";
 import ListClass from "./container/ListClass";
 import ClassInfo from "./container/ClassInfo";
+import Analytics from "./container/Analytics";
+import Setting from "./container/Setting";
+import Students from "./container/Students";
 
 function App() {
   return (
@@ -16,6 +19,15 @@ function App() {
               </Route>
               <Route path="/class">
                   <ClassInfo />
+              </Route>
+              <Route path="/thongke">
+                  <Analytics />
+              </Route>
+              <Route path="/caidat">
+                  <Setting />
+              </Route>
+              <Route path="/students">
+                  <Students />
               </Route>
               <Route path="/">
                   <ListClass />
