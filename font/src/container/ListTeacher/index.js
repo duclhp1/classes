@@ -3,8 +3,11 @@ import {Card, Button} from "antd";
 const { Meta } = Card;
 import "./styles.css";
 import {Sex, teachers} from "../../db";
+import {useState} from "react";
+import ModalAddTeacher from "../../component/ModalAddTeacher";
 
 export default function ListTeacher() {
+    const [visibleAddStudent, setVisibleAddStudent] = useState(false);
     const renderDescription = (item) => {
         const {sex, dob, address, phone} = item;
         return (
@@ -22,6 +25,12 @@ export default function ListTeacher() {
             links={["Danh sách giáo viên"]}
             tab={4}
         >
+            <Button size="large" type="ghost" onClick={() => setVisibleAddStudent(true)}>Thêm giáo viên</Button>
+            <ModalAddTeacher
+                visible={visibleAddStudent}
+                onOk={(name, address, dob)=>{console.log("ok", name, address, dob)}}
+                onCancel={() => setVisibleAddStudent(false)}
+            />
             <div className="d-flex justify-content-center flex-wrap">
                 {teachers.map((item, index) =>
                     <Card

@@ -1,4 +1,4 @@
-import {Input, Modal} from "antd";
+import {Modal} from "antd";
 import "./styles.css";
 import $ from "jquery";
 
@@ -30,43 +30,9 @@ export default function ModalAddClass({visible, onOk, onCancel}) {
             onCancel={onCancel}
             cancelText={"Đóng"}
             okText={"Thêm"}
-            title={"Thêm học sinh"}
+            title={"Thêm lớp học"}
         >
-            <Input
-                id={"name"}
-                placeholder={"Tên học sinh"}
-                allowClear
-                required
-                suffix={<div style={{color: "red"}}>*</div>}
-            />
-            <Input
-                id={"address"}
-                placeholder={"Địa chỉ"}
-                className={"input"}
-                allowClear
-            />
-            <Input
-                id={"dob"}
-                placeholder={"Ngày sinh"}
-                className={"input"}
-                allowClear
-            />
-            <Input
-                id={"parentName"}
-                className={"input"}
-                placeholder={"Tên phụ huynh học sinh"}
-                allowClear
-                required
-                suffix={<div style={{color: "red"}}>*</div>}
-            />
-            <Input
-                id={"parentPhone"}
-                placeholder={"Số điện thoại phụ huynh"}
-                className={"input"}
-                allowClear
-                required
-                suffix={<div style={{color: "red"}}>*</div>}
-            />
+            Giáo viên đứng lớp
         </Modal>
     )
 }

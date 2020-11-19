@@ -40,7 +40,7 @@ function beforeUpload(file, setState) {
     // return isJpgOrPng && isLt2M;
 }
 
-export default function ModalAddStudent({visible, onOk, onCancel}) {
+export default function ModalAddTeacher({visible, onOk, onCancel}) {
     const [state, setState] = useState({loading: null, imageUrl: null })
     const {loading, imageUrl} = state
 
@@ -96,7 +96,7 @@ export default function ModalAddStudent({visible, onOk, onCancel}) {
             onCancel={onCancel}
             cancelText={"Đóng"}
             okText={"Thêm"}
-            title={"Thêm học sinh"}
+            title={"Thêm giáo viên"}
         >
             <Upload
                 accept="image/*"
@@ -111,7 +111,7 @@ export default function ModalAddStudent({visible, onOk, onCancel}) {
             </Upload>
             <Input
                 id={"name"}
-                placeholder={"Tên học sinh"}
+                placeholder={"Tên giáo viên"}
                 allowClear
                 required
                 suffix={<div style={{color: "red"}}>*</div>}
@@ -129,16 +129,8 @@ export default function ModalAddStudent({visible, onOk, onCancel}) {
                 allowClear
             />
             <Input
-                id={"parentName"}
-                className={"input"}
-                placeholder={"Tên phụ huynh học sinh"}
-                allowClear
-                required
-                suffix={<div style={{color: "red"}}>*</div>}
-            />
-            <Input
                 id={"parentPhone"}
-                placeholder={"Số điện thoại phụ huynh"}
+                placeholder={"Số điện thoại"}
                 className={"input"}
                 allowClear
                 required
