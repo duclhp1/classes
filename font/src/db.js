@@ -59,3 +59,33 @@ export const students = [
         key: 6
     },
 ]
+
+export const teachers = [
+    {
+        img: "https://www.pngkey.com/png/full/851-8511104_drawing-cartoon-portrait-face-painting-nh-chn-dung.png",
+        title: "Thầy tóc xoăn",
+        sex: Sex.Male,
+        dob: "20-06-2004",
+        addres: "Hanoi",
+        phone: "0987654321",
+        key: 1
+    },
+    {
+        img: "https://png.pngtree.com/element_our/20190602/ourlarge/pngtree-cartoon-man-avatar-free-illustration-image_1375256.jpg",
+        title: "Thầy đội mũ",
+        sex: Sex.Male,
+        dob: "20-06-2004",
+        addres: "Hanoi",
+        phone: "0987654321",
+        key: 2
+    },
+    {
+        img: "https://lmt.com.vn/wp-content/uploads/2014/10/10-buoc-de-bien-chan-dung-cua-ban-thanh-anh-hoat-hinh-14.jpg",
+        title: "Cô tóc ngắn",
+        sex: Sex.Female,
+        dob: "20-06-2004",
+        addres: "Hanoi",
+        phone: "0987654321",
+        key: 3
+    },
+]
