@@ -42,7 +42,7 @@ const listCard = [
     },
 ]
 
-export default function ListClass() {
+export default function ListTeacher() {
     const renderDescription = (des) => {
         const list = des.split("\n");
         return list.map(item => <div key={item}>{item}</div>
@@ -51,8 +51,8 @@ export default function ListClass() {
     return (
         <Main
             footerText={"Created by DucPV"}
-            links={["Danh sách lớp"]}
-            tab={1}
+            links={["Danh sách giáo viên"]}
+            tab={4}
         >
             <div className="d-flex justify-content-center flex-wrap">
                 {listCard.map((item, index) =>

@@ -5,10 +5,12 @@ import {
 } from "react-router-dom";
 import Login from "./container/Login";
 import ListClass from "./container/ListClass";
+import ListStudent from "./container/ListStudent";
+import ListTeacher from "./container/ListTeacher";
 import ClassInfo from "./container/ClassInfo";
 import Analytics from "./container/Analytics";
-import Setting from "./container/Setting";
-import Students from "./container/Students";
+// import Setting from "./container/Setting";
+// import Students from "./container/Students";
 
 function App() {
   return (
@@ -23,11 +25,11 @@ function App() {
               <Route path="/thongke">
                   <Analytics />
               </Route>
-              <Route path="/caidat">
-                  <Setting />
+              <Route path="/teachers">
+                  <ListTeacher />
               </Route>
               <Route path="/students">
-                  <Students />
+                  <ListStudent />
               </Route>
               <Route path="/">
                   <ListClass />

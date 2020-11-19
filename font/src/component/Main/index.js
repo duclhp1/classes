@@ -19,7 +19,7 @@ function Main({links, footerText, displayContent, children, tab}) {
     };
 
     const openListClass = () => {
-        history.push("/classes")
+        history.push("/")
     };
 
     const openListStudent = () => {
@@ -31,7 +31,7 @@ function Main({links, footerText, displayContent, children, tab}) {
     };
 
     const openSetting = () => {
-        history.push("/caidat")
+        history.push("/teachers")
     };
 
     return (
@@ -56,7 +56,7 @@ function Main({links, footerText, displayContent, children, tab}) {
                 <Header className="site-layout-background" style={{ padding: 0 }} />
                 <Content style={{ margin: '0 6px' }}>
                     <Breadcrumb style={{ margin: '6px 0' }}>
-                        {links.map((item, index) => <Breadcrumb.Item key={index}>{item}</Breadcrumb.Item>)}
+                        {links.map((item, index) => <Breadcrumb.Item key={index}><h4>{item}</h4></Breadcrumb.Item>)}
                     </Breadcrumb>
                     <div className="site-layout-background" style={{ padding: 0, minHeight: 360 }}>
                         {children || displayContent}
