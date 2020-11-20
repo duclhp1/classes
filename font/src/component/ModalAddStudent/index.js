@@ -107,7 +107,7 @@ export default function ModalAddStudent({visible, onOk, onCancel}) {
                 beforeUpload={(file) => beforeUpload(file, setState)}
                 action=""
             >
-                {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
+                {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%', height: '100%' }} /> : uploadButton}
             </Upload>
             <Input
                 id={"name"}

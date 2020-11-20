@@ -1,7 +1,7 @@
 import {Input, Modal} from "antd";
 import "./styles.css";
 import $ from "jquery";
-import {useState} from "react"
+import {useState, useEffect} from "react"
 
 import {
     Upload,
@@ -40,27 +40,30 @@ function beforeUpload(file, setState) {
     // return isJpgOrPng && isLt2M;
 }
 
-export default function ModalAddTeacher({visible, onOk, onCancel}) {
+export default function ModalAddTeacher({visible, onOk, onCancel, data}) {
     const [state, setState] = useState({loading: null, imageUrl: null })
     const {loading, imageUrl} = state
+
+    useEffect(() => {
+        if (data) {
+            setState({
+                imageUrl: data.imageUrl,
+            })
+        }
+    }, [])
 
     const onDone = () => {
         const name = $("#name").val();
         const address = $("#address").val();
         const dob = $("#dob").val();
-        const parentName = $("#parentName").val();
-        const parentPhone = $("#parentPhone").val();
+        const phone = $("#phone").val();
         if (name.length > 0) {
-            if (parentName.length > 0) {
-                if (parentPhone > 0) onOk && onOk(name, address, dob, parentName, parentPhone);
+                if (phone > 0) onOk && onOk(name, address, dob, phone);
                 else {
-                    alert("Hãy nhập SĐT phụ huynh");
+                    alert("Hãy nhập SĐT giáo viên");
                 }
-            } else {
-                alert("Hãy nhập Tên phụ huynh");
-            }
         } else {
-            alert("Hãy nhập Tên học sinh");
+            alert("Hãy nhập Tên giáo viên");
         }
     };
 
@@ -107,7 +110,7 @@ export default function ModalAddTeacher({visible, onOk, onCancel}) {
                 beforeUpload={(file) => beforeUpload(file, setState)}
                 action=""
             >
-                {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
+                {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%', height: '100%' }} /> : uploadButton}
             </Upload>
             <Input
                 id={"name"}
@@ -129,7 +132,7 @@ export default function ModalAddTeacher({visible, onOk, onCancel}) {
                 allowClear
             />
             <Input
-                id={"parentPhone"}
+                id={"phone"}
                 placeholder={"Số điện thoại"}
                 className={"input"}
                 allowClear
