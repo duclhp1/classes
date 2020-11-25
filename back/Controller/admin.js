@@ -50,8 +50,14 @@ function edit(res, id, password) {
     })
 }
 
+async function checkAdmin(id) {
+    const res = await adminModel.findById(id)
+    return res && `${res._id}` === id
+}
+
 module.exports = {
     addAdmin,
     login,
     edit,
+    checkAdmin,
 }

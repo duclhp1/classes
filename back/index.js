@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const admin = require("./Router/admin")
+const student = require("./Router/student")
 const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/class', {useNewUrlParser: true});
@@ -15,3 +16,4 @@ app.listen(3001,() => {
     console.log("Started on PORT 3001");
 })
 app.use("/admin", admin)
+app.use("/student", student)
