@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const {getStudent, addStudent, editStudent} = require("../Controller/student");
+const {getTeacher, addTeacher, editTeacher} = require("../Controller/teacher");
 const {checkAdmin} = require("../Controller/admin");
 
-router.get("/getStudent", async function(req, res) {
+router.get("/getTeacher", async function(req, res) {
     const adminId = req.headers.key
     const isAdmin = await checkAdmin(adminId)
     if (isAdmin) {
-        const resp = await getStudent()
+        const resp = await getTeacher()
         res.send({
             success: true,
             data: resp
@@ -20,12 +20,12 @@ router.get("/getStudent", async function(req, res) {
     }
 });
 
-router.post("/addStudent", async function(req, res) {
+router.post("/addTeacher", async function(req, res) {
     const adminId = req.headers.key
     const isAdmin = await checkAdmin(adminId)
 
     if (isAdmin) {
-        const resp = await addStudent(req.body)
+        const resp = await addTeacher(req.body)
         res.send({
             success: true,
             data: resp
@@ -38,12 +38,12 @@ router.post("/addStudent", async function(req, res) {
     }
 });
 
-router.post("/editStudent", async function(req, res) {
+router.post("/editTeacher", async function(req, res) {
     const adminId = req.headers.key
     const isAdmin = await checkAdmin(adminId)
 
     if (isAdmin) {
-        const resp = await editStudent(req.body)
+        const resp = await editTeacher(req.body)
         res.send({
             success: true,
             data: resp

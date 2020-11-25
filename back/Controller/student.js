@@ -14,7 +14,21 @@ async function addStudent(s) {
     return newStudent
 }
 
+async function editStudent(s) {
+    if (isEmpty(s.id) || isEmpty(s.name) || isEmpty(s.parentName) || isEmpty(s.parentPhone)) return null
+    let st = await student.findById(s.id);
+    const keys = Object.keys(s)
+    for (let i=0; i < keys.length; i++) {
+        if (keys[i] !== "id") {
+            st[keys[i]] = s[keys[i]]
+        }
+    }
+    await st.save()
+    return st
+}
+
 module.exports = {
     getStudent,
     addStudent,
+    editStudent,
 }
