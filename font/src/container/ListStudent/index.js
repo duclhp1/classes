@@ -6,8 +6,14 @@ import {
 const { Meta } = Card;
 import "./styles.css";
 import {Sex, students} from "../../db";
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import ModalAddStudent from "../../component/ModalAddStudent";
+import axios from "axios";
+
+const getListStudent = async () => {
+    const res = await axios.get("http://localhost:3001/student/getStudent");
+    console.log("res", res);
+}
 
 export default function ListStudent() {
     const [visibleAddStudent, setVisibleAddStudent] = useState(false);
@@ -22,6 +28,11 @@ export default function ListStudent() {
             </div>
         )
     }
+
+    useEffect(() => {
+        getListStudent();
+    }, [])
+
     return (
         <Main
             footerText={"Created by DucPV"}
