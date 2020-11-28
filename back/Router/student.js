@@ -5,6 +5,7 @@ const {checkAdmin} = require("../Controller/admin");
 
 router.get("/getStudent", async function(req, res) {
     const adminId = req.headers.key
+    console.log("adminId", adminId)
     const isAdmin = await checkAdmin(adminId)
     if (isAdmin) {
         const resp = await getStudent()

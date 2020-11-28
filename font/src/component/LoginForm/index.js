@@ -2,6 +2,7 @@ import "./styles.css"
 import {useHistory} from "react-router-dom";
 const onLogin = (history) => {
     history.push("/");
+    localStorage.setItem("key", "5fc2235149b13c0bd5bfc1f6")
 };
 
 function LoginForm() {

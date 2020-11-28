@@ -8,11 +8,13 @@ import "./styles.css";
 import {Sex, students} from "../../db";
 import {useState, useEffect} from "react";
 import ModalAddStudent from "../../component/ModalAddStudent";
-import axios from "axios";
+import {getListStudent} from "../../api/api";
 
-const getListStudent = async () => {
-    const res = await axios.get("http://localhost:3001/student/getStudent");
-    console.log("res", res);
+const getListStudents = async () => {
+    // const res = await axios.get("http://localhost:3001/student/getStudent");
+    const res = await getListStudent()
+    console.log("getListStudents", res)
+    return res;
 }
 
 export default function ListStudent() {
@@ -30,7 +32,7 @@ export default function ListStudent() {
     }
 
     useEffect(() => {
-        getListStudent();
+        getListStudents();
     }, [])
 
     return (
