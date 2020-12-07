@@ -1,8 +1,15 @@
 import "./styles.css"
 import {useHistory} from "react-router-dom";
-const onLogin = (history) => {
-    history.push("/");
-    localStorage.setItem("key", "5fc2235149b13c0bd5bfc1f6")
+import {login} from "../../api/api";
+import {message} from "antd";
+const onLogin = async (history) => {
+    const username = document.getElementById("login_user").value
+    const password = document.getElementById("login_password").value
+    const res = await login(username, password)
+    if (res.data.success) {
+        history.push("/");
+        localStorage.setItem("key", res.data.data._id)
+    } else message.error('Tài khoản hoặc mật khẩu không đúng!')
 };
 
 function LoginForm() {
@@ -24,14 +31,14 @@ function LoginForm() {
                                 <div className="input-group-append">
                                     <span className="input-group-text"><i className="fas fa-user"></i></span>
                                 </div>
-                                <input type="text" name="" className="form-control input_user" value=""
+                                <input type="text" name="" className="form-control input_user" id="login_user"
                                        placeholder="username"/>
                             </div>
                             <div className="input-group mb-2">
                                 <div className="input-group-append">
                                     <span className="input-group-text"><i className="fas fa-key"></i></span>
                                 </div>
-                                <input type="password" name="" className="form-control input_pass" value=""
+                                <input type="password" name="" className="form-control input_pass" id="login_password"
                                        placeholder="password"/>
                             </div>
                             <div className="form-group">

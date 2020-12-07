@@ -5,34 +5,43 @@ import {
 } from "antd";
 const { Meta } = Card;
 import "./styles.css";
-import {Sex, students} from "../../db";
+import {Sex} from "../../db";
 import {useState, useEffect} from "react";
 import ModalAddStudent from "../../component/ModalAddStudent";
-import {getListStudent} from "../../api/api";
+import {addStudent, getListStudent} from "../../api/api";
 
-const getListStudents = async () => {
-    // const res = await axios.get("http://localhost:3001/student/getStudent");
+const getListStudents = async (setListStudent) => {
     const res = await getListStudent()
     console.log("getListStudents", res)
-    return res;
+
+    if (res.data.success) {
+        setListStudent(res.data.data)
+    }
 }
 
 export default function ListStudent() {
     const [visibleAddStudent, setVisibleAddStudent] = useState(false);
+    const [listStudent, setListStudent] = useState([]);
     const renderDescription = (item) => {
-        const {sex, dob, address, phone} = item;
+        const {sex, dob, address, parentName, parentPhone} = item;
         return (
             <div>
                 {sex && <div>{`Giới tính: ${sex === Sex.Male ? "Nam" : "Nữ"}`}</div>}
                 {dob && <div>{`Ngày sinh: ${dob}`}</div>}
                 {address && <div>{`Địa chỉ: ${address}`}</div>}
-                {phone && <div>{`SĐT: ${phone}`}</div>}
+                {parentName && <div>{`Tên phụ huynh: ${parentName}`}</div>}
+                {parentPhone && <div>{`SĐT phụ huynh: ${parentPhone}`}</div>}
             </div>
         )
     }
 
+    const createStudent = async (name, address, dob, parentName, parentPhone, img) => {
+        const res = await addStudent({name, address, dob, parentPhone, parentName, img})
+        console.log("res", res)
+    }
+
     useEffect(() => {
-        getListStudents();
+        getListStudents(setListStudent);
     }, [])
 
     return (
@@ -42,20 +51,22 @@ export default function ListStudent() {
             tab={2}
         >
             <Button size="large" type="ghost" onClick={() => setVisibleAddStudent(true)}>Thêm học sinh</Button>
-            <ModalAddStudent
-                visible={visibleAddStudent}
-                onOk={(name, address, dob)=>{console.log("ok", name, address, dob)}}
-                onCancel={() => setVisibleAddStudent(false)}
-            />
+            {visibleAddStudent &&
+                <ModalAddStudent
+                    visible={true}
+                    onOk={(name, address, dob, parentName, parentPhone, imageUrl) => createStudent(name, address, dob, parentName, parentPhone, imageUrl)}
+                    onCancel={() => setVisibleAddStudent(false)}
+                />
+            }
             <div className="d-flex justify-content-center flex-wrap">
-                {students.map((item, index) =>
+                {listStudent.map((item, index) =>
                     <Card
                         key={index}
                         hoverable
                         style={{ width: 250, margin: 10 }}
-                        cover={<img alt="example" src={item.img} style={{height: 250}} />}
+                        cover={<img alt="example" src={item.img || 'https://thailamlandscape.vn/wp-content/uploads/2017/10/no-image.png'} style={{height: 250}} />}
                     >
-                        <Meta title={item.title} description={renderDescription(item)} />
+                        <Meta title={item.name} description={renderDescription(item)} />
                     </Card>)}
             </div>
         </Main>

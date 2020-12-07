@@ -8,6 +8,7 @@ const api = axios.create({
 
 const setKey = async () => {
     const key = await localStorage.getItem("key")
+    console.log('key', key)
     api.defaults.headers = {...api.defaults.headers, key}
 }
 
@@ -17,7 +18,11 @@ export const getListStudent = async () => {
     return api.get("/student/getStudent")
 }
 
-export const login = async (username, password) => {
+export const addStudent = async (data) => {
     await setKey();
+    return api.post("/student/addStudent", data)
+}
+
+export const login = async (username, password) => {
     return api.post("/admin/login", {username, password})
 }

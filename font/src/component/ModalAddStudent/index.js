@@ -9,12 +9,43 @@ import {
 } from 'antd';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 
+const resizeImage = (base64Str, maxWidth = 400, maxHeight = 350) => {
+    return new Promise((resolve) => {
+        let img = new Image()
+        img.src = base64Str
+        img.onload = () => {
+            let canvas = document.createElement('canvas')
+            const MAX_WIDTH = maxWidth
+            const MAX_HEIGHT = maxHeight
+            let width = img.width
+            let height = img.height
+
+            if (width > height) {
+                if (width > MAX_WIDTH) {
+                    height *= MAX_WIDTH / width
+                    width = MAX_WIDTH
+                }
+            } else {
+                if (height > MAX_HEIGHT) {
+                    width *= MAX_HEIGHT / height
+                    height = MAX_HEIGHT
+                }
+            }
+            canvas.width = width
+            canvas.height = height
+            let ctx = canvas.getContext('2d')
+            ctx.drawImage(img, 0, 0, width, height)
+            resolve(canvas.toDataURL())
+        }
+    })
+}
+
 function getBase64(img, callback) {
     console.log("img", img);
     const reader = new FileReader();
-    reader.addEventListener('load', () => {
+    reader.addEventListener('load', async () => {
         console.log("reader", reader.result);
-        callback(reader.result);
+        callback(await resizeImage(reader.result, 900, 900));
     });
     reader.readAsDataURL(img);
 }
@@ -28,16 +59,7 @@ function beforeUpload(file, setState) {
             imageUrl,
         })
     });
-    return true || file;
-    // const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-    // if (!isJpgOrPng) {
-    //     message.error('You can only upload JPG/PNG file!');
-    // }
-    // const isLt2M = file.size / 1024 / 1024 < 12;
-    // if (!isLt2M) {
-    //     message.error('Ảnh phải có kích thước nhỏ hơn 12MB!');
-    // }
-    // return isJpgOrPng && isLt2M;
+    return false;
 }
 
 export default function ModalAddStudent({visible, onOk, onCancel}) {
@@ -52,7 +74,7 @@ export default function ModalAddStudent({visible, onOk, onCancel}) {
         const parentPhone = $("#parentPhone").val();
         if (name.length > 0) {
             if (parentName.length > 0) {
-                if (parentPhone > 0) onOk && onOk(name, address, dob, parentName, parentPhone);
+                if (parentPhone > 0) onOk && onOk(name, address, dob, parentName, parentPhone, imageUrl);
                 else {
                     alert("Hãy nhập SĐT phụ huynh");
                 }
@@ -63,24 +85,6 @@ export default function ModalAddStudent({visible, onOk, onCancel}) {
             alert("Hãy nhập Tên học sinh");
         }
     };
-
-    // const handleChange = info => {
-    //     return info;
-        // if (info.file.status === 'uploading') {
-        //     setState({ loading: true });
-        //     return;
-        // }
-        // if (info.file.status === 'done') {
-        //     // Get this url from response in real world.
-        //     getBase64(info.file.originFileObj, imageUrl => {
-        //         console.log("imageUrl", imageUrl);
-        //         setState({
-        //             imageUrl,
-        //             loading: false,
-        //         })
-        //     });
-        // }
-    // };
 
     const uploadButton = (
         <div>

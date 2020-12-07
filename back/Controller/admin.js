@@ -51,8 +51,10 @@ function edit(res, id, password) {
 }
 
 async function checkAdmin(id) {
+    if (!id || id === 'null') return false
     const res = await adminModel.findById(id)
-    return res && `${res._id}` === id
+    console.log("res", res)
+    return res ? (`${res._id}` === id) : false
 }
 
 module.exports = {
