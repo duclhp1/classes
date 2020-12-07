@@ -6,5 +6,6 @@ const studentSchema = new mongoose.Schema({
     parentName: String,
     address: String,
     dob: String,
+    state: String,
 });
 module.exports = mongoose.model('student', studentSchema);

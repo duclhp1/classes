@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/class', {useNewUrlParser: true});
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.raw());
 app.get('/',function(req,res){
     res.sendfile("index.html");

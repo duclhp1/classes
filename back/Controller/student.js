@@ -3,13 +3,13 @@ const {isEmpty} = require("../utils");
 const student = require("../Model/student");
 
 async function getStudent() {
-    const res = await student.find({})
+    const res = await student.find({state: 'visible'})
     return res
 }
 
 async function addStudent(s) {
     if (isEmpty(s.name) || isEmpty(s.parentName) || isEmpty(s.parentPhone)) return null
-    const newStudent = new student(s);
+    const newStudent = new student({...s, state: 'visible'});
     await newStudent.save()
     return newStudent
 }

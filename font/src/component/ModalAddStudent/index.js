@@ -1,7 +1,7 @@
 import {Input, Modal} from "antd";
 import "./styles.css";
 import $ from "jquery";
-import {useState} from "react"
+import {useState, useEffect} from "react"
 
 import {
     Upload,
@@ -62,9 +62,20 @@ function beforeUpload(file, setState) {
     return false;
 }
 
-export default function ModalAddStudent({visible, onOk, onCancel}) {
+export default function ModalAddStudent({visible, onOk, onCancel, item}) {
     const [state, setState] = useState({loading: null, imageUrl: null })
     const {loading, imageUrl} = state
+
+    useEffect(() => {
+        if (item) {
+            setState(pre => {
+                return {
+                    ...pre,
+                    imageUrl: item.img,
+                }
+            })
+        }
+    }, [item])
 
     const onDone = () => {
         const name = $("#name").val();
@@ -119,18 +130,21 @@ export default function ModalAddStudent({visible, onOk, onCancel}) {
                 allowClear
                 required
                 suffix={<div style={{color: "red"}}>*</div>}
+                defaultValue={item?.name || ''}
             />
             <Input
                 id={"address"}
                 placeholder={"Địa chỉ"}
                 className={"input"}
                 allowClear
+                defaultValue={item?.address || ''}
             />
             <Input
                 id={"dob"}
                 placeholder={"Ngày sinh"}
                 className={"input"}
                 allowClear
+                defaultValue={item?.dob || ''}
             />
             <Input
                 id={"parentName"}
@@ -139,6 +153,7 @@ export default function ModalAddStudent({visible, onOk, onCancel}) {
                 allowClear
                 required
                 suffix={<div style={{color: "red"}}>*</div>}
+                defaultValue={item?.parentName || ''}
             />
             <Input
                 id={"parentPhone"}
@@ -147,6 +162,7 @@ export default function ModalAddStudent({visible, onOk, onCancel}) {
                 allowClear
                 required
                 suffix={<div style={{color: "red"}}>*</div>}
+                defaultValue={item?.parentPhone || ''}
             />
         </Modal>
     )

@@ -23,6 +23,11 @@ export const addStudent = async (data) => {
     return api.post("/student/addStudent", data)
 }
 
+export const editStudent = async (data) => {
+    await setKey();
+    return api.post("/student/editStudent", data)
+}
+
 export const login = async (username, password) => {
     return api.post("/admin/login", {username, password})
 }
