@@ -26,6 +26,17 @@ async function checkin(history) {
     return newCheckin
 }
 
+async function countForStudent(studentIds, fromTime, toTime) {
+    const res = await checkinHistory.find({
+        userId: { $in: studentIds },
+        date: { $gte: fromTime, $lte: toTime }
+    })
+    console.log('countForStudent', res)
+
+    return res
+}
+
 module.exports = {
     checkin,
+    countForStudent,
 }

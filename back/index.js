@@ -3,6 +3,10 @@ const bodyParser = require("body-parser");
 const app = express();
 const admin = require("./Router/admin")
 const student = require("./Router/student")
+const studentInClass = require("./Router/studentInClass")
+const checkinHistory = require("./Router/checkinHistory")
+const classes = require("./Router/class")
+const teacher = require("./Router/teacher")
 const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/class', {useNewUrlParser: true});
@@ -17,3 +21,7 @@ app.listen(3001,() => {
 })
 app.use("/admin", admin)
 app.use("/student", student)
+app.use("/studentInClass", studentInClass)
+app.use("/checkinHistory", checkinHistory)
+app.use("/classes", classes)
+app.use("/teacher", teacher)

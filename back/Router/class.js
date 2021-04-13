@@ -30,7 +30,8 @@ router.get("/getClassInfo", async function(req, res) {
         const resp = await getClass()
         res.send({
             success: true,
-            data: resp
+            data: resp,
+            students
         })
     }
     else {

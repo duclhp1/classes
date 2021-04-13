@@ -10,9 +10,15 @@ async function getStudent() {
 
 async function addStudent(s) {
     if (isEmpty(s.classId) || isEmpty(s.studentId) || isEmpty(s.state)) return null
-    const newStudent = new studentInClass(s);
-    await newStudent.save()
-    return newStudent
+    let st = await studentInClass.findById(s.id);
+    if (!st) {
+        const newStudent = new studentInClass(s);
+        await newStudent.save()
+        return newStudent
+    }
+    st.state = 'active';
+    await st.save()
+    return st
 }
 
 async function removeStudent(s) {
